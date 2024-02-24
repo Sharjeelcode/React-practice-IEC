@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+const defaultImage = "https://www.shutterstock.com/image-photo/karachi-pakistan-february-10-2021-260nw-1929054245.jpg"
+
 function App() {
   const [count, setCount] = useState(0)
   const [image, setimage] = useState()
@@ -20,28 +22,28 @@ function App() {
   }
 
 
-  const [name, setName] = useState()
-  const [regno, setRegno] = useState()
-  const [Age, setAge] = useState()
-  const [student, setstudent] = useState()
-
   const existingstudentsdata = [
     {
-      name: "sharjeel",
-      regno: 1234,
-      Age: 24
+      name: "Ajaz",
+      regno: 302,
+      Age: 28
     },
     {
-      name: "maaz",
-      regno: 12354,
+      name: "Maaz",
+      regno: 201,
       Age: 44
     },
     {
-      name: "ajaz",
-      regno: 1234,
-      Age: 28
+      name: "Sharjeel",
+      regno: 102,
+      Age: 24
     }
   ]
+  const [name, setName] = useState()
+  const [regno, setRegno] = useState()
+  const [Age, setAge] = useState()
+  const [student, setstudent] = useState(existingstudentsdata)
+
   const addname = (e) => {
     setName(e.target.value)
   }
@@ -60,18 +62,15 @@ function App() {
       regno,
       Age
     }
-// console.log(newStudentData);
-    const [...oldData] = existingstudentsdata
-    setstudent([...oldData , newStudentData])
 
-    console.log(...oldData);
-    // // setstudent(prevStudents => [...prevStudents, newStudentData]);
+    setstudent(prevStudents => [...prevStudents, newStudentData]);
 
 
   }
 
   return (
     <>
+    <h1 className='bg-red-700'>Hello</h1>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -100,12 +99,12 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <div>
-        <input type="text" placeholder='name' onChange={addname} />
-        <input type="text" placeholder='reg#' onChange={addreg} />
+        <input type="text" placeholder='Name' onChange={addname} />
+        <input type="text" placeholder='Reg #' onChange={addreg} />
         <input type="text" placeholder='Age' onChange={addage} />
         <button onClick={addStudentData}>Add Data</button>
       </div>
-      <table>
+      <table className='bg-white'>
         <thead>
           <tr>
             <th>Sr.No</th>
@@ -115,7 +114,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {existingstudentsdata.map((data, index) => {
+          {student.map((data, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
